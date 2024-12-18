@@ -1,0 +1,25 @@
+let lastTime = 0;
+let frameCount = 0;
+let fpsDisplay = document.createElement("div");
+fpsDisplay.style.position = "fixed";
+fpsDisplay.style.top = "10px";
+fpsDisplay.style.left = "10px";
+fpsDisplay.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+fpsDisplay.style.color = "#fff";
+fpsDisplay.style.padding = "5px";
+fpsDisplay.style.borderRadius = "5px";
+fpsDisplay.style.fontFamily = "Arial, sans-serif";
+fpsDisplay.style.zIndex = "9999";
+document.body.appendChild(fpsDisplay);
+
+function showFPS(timestamp) {
+    frameCount++;
+    if (timestamp - lastTime >= 1000) {
+        fpsDisplay.textContent = `FPS: ${frameCount}`;
+        lastTime = timestamp;
+        frameCount = 0;
+    }
+    requestAnimationFrame(showFPS);
+}
+
+requestAnimationFrame(showFPS);
